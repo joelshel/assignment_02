@@ -5,8 +5,8 @@ geno_data = read.csv("~/Documents/ASB/assignment_02/Cornales.csv",
                     sep=" ",
                     na.strings=9)
 
-summary(geno_data)
-geno_data = geno_data[rowSums(is.na(geno_data)) != ncol(geno_data)-1, ]
+
+geno_data = geno_data[rowSums(is.na(geno_data)) != ncol(geno_data)-1,]
 
 
 View(geno_data)
@@ -19,11 +19,10 @@ tlep_pca = pca(geno_data[,-c(1)],
                center=T,
                nPcs=2,
                method="nipals")
-# We have to use the `nipals` method because we have missing data
+
 
 print(tlep_pca@R2)
 
-# Use the age group as discriminant
 slplot(tlep_pca,
        scol=colors,
        scoresLoadings=c(TRUE,FALSE),
