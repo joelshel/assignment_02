@@ -1,0 +1,44 @@
+ipyrad
+
+ipyrad -p params-Cornales.txt -s 1 -c 3
+ipyrad -p params-Cornales.txt -s 2 -c 3
+ipyrad -p params-Cornales.txt -s 3 -c 3
+ipyrad -p params-Cornales.txt -s 4 -c 3
+ipyrad -p params-Cornales.txt -s 5 -c 3
+ipyrad -p params-Cornales.txt -s 6 -c 3
+ipyrad -p params-Cornales.txt -s 7 -c 3
+
+
+RAxML 
+
+raxmlHPC -f a -m GTRCAT -p 112358 -x 112358 -N 100 -s Cornales.phy -n my_run01
+
+
+MrBayes block in nexus file
+
+begin mrbayes;
+    set autoclose=yes;
+    outgroup Pungent-5;
+    mcmcp ngen=200000 printfreq=1000 samplefreq=100 diagnfreq=1000 nchains=4 savebrlens=yes filename=Cornales;
+    mcmc;
+    sumt filename=Cornales;
+    end;
+
+
+Create Nexus file
+./nexus_to_phylip.py Cornales.phy
+
+
+MrBayes
+mb
+> execute Cornales.nexus
+
+
+Draw RAxML tree
+
+./plot_tree.py ipirab01/RAxML_trees/RAxML_bipartitions.my_run01
+
+
+Create csv file
+
+./generate_csv.py Cornales.geno Cornales.vcf Cornales.csv
