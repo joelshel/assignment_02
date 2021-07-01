@@ -13,9 +13,11 @@ def main():
         tre = toytree.tree(sys.argv[1], tree_format=10)
     except FileNotFoundError:
         print("Tree not found!")
-    tre = tre.root("Pungent-5")
+    # tre = tre.root("Pungent-5")
 
+    # print(tre.get_edge_values('prob'))
     # print(tre.get_node_values('prob'))
+    # print(tre.features)
 
     canvas, axes, mark = tre.draw(
         layout='c',
@@ -23,7 +25,7 @@ def main():
         node_style={"stroke": "black"},
         width=1200,
         height=1200,
-        node_labels='prob',
+        node_labels="support",
         node_sizes=16,
         use_edge_lengths=True,
     );
